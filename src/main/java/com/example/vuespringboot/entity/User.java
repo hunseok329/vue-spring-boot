@@ -1,4 +1,4 @@
-package com.example.vuespringboot.dao;
+package com.example.vuespringboot.entity;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;

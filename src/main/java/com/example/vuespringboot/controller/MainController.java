@@ -1,7 +1,7 @@
 package com.example.vuespringboot.controller;
 
-import com.example.vuespringboot.UserRepository;
-import com.example.vuespringboot.dao.User;
+import com.example.vuespringboot.dao.UserRepository;
+import com.example.vuespringboot.entity.User;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
