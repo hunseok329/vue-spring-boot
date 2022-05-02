@@ -82,6 +82,7 @@
     </ul>
     <div>
       <button v-on:click="getData"> 데이터 베이스 호출 </button>
+      <button v-on:click="getDatabase"> 데이터 베이스 호출 2 </button>
       <div>{{ temp }}</div>
     </div>
   </div>
@@ -111,6 +112,12 @@ export default {
     },
     changeTemp: function (data) {
       console.log(data)
+    },
+    getDatabase: function() {
+      axios.get('/api/hello')
+        .then(function (response) {
+          console.log(response)
+        })
     }
   }
 }

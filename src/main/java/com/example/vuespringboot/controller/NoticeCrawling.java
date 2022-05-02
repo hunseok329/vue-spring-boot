@@ -10,6 +10,8 @@ import org.springframework.web.bind.annotation.RestController;
 import com.example.vuespringboot.service.CrawlingService;
 
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.HashMap;
 
 @RestController
 @RequestMapping("/api")
@@ -18,10 +20,10 @@ public class NoticeCrawling {
     @Autowired
     private CrawlingService crawlingService;
     @GetMapping("/hello")
-    public String noticeCrawling() throws IOException {
+    public ArrayList<HashMap<String, String>> noticeCrawling() throws IOException {
 
-        String notice = crawlingService.getNotice();
+        ArrayList<HashMap<String, String>> notice = crawlingService.getNotice();
 
-        return "hello";
+        return notice;
     }
 }
