@@ -21,7 +21,7 @@ public class NoticeCrawling {
     private CrawlingService crawlingService;
     @GetMapping("/hello")
     public ArrayList<HashMap<String, String>> noticeCrawling() throws IOException {
-
+        //크롤링 결과 리스트
         ArrayList<HashMap<String, String>> notice = crawlingService.getNotice();
 
         return notice;
