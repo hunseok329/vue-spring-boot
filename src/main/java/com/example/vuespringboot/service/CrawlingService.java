@@ -23,7 +23,7 @@ public class CrawlingService {
         Elements parsingTable = doc.getElementsByClass("board_list");
         Elements parsingTbody = parsingTable.select("tbody");
         Elements parsingTr = parsingTbody.select("tr");
-
+        //test commit
 
         for(Element trItem : parsingTr){
             HashMap<String, String> noticeItem = new HashMap<String, String>();
