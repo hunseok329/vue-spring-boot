@@ -27,11 +27,6 @@ export default {
       tests: []
     };
   },
-  methods: {
-    onClick() {
-      console.log(this.msg, "버튼");
-    },
-  },
   created() {
     console.log("Created");
   },
