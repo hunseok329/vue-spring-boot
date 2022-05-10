@@ -70,7 +70,6 @@ public class CrawlingService {
                 System.out.println("게시글 저자 : " + author);
                 System.out.println("게시 날짜 : " + date);
             }
-            System.out.println("<----->");
 
             //각 게시글 정보를 noticeItems 배열에 추가
             noticeItems.add(noticeItem);
