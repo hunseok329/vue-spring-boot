@@ -1,90 +1,14 @@
 <template>
   <div class="hello">
-    <h1>{{ msg }}</h1>
-    <h2>Essential Links</h2>
-    <ul>
-      <li>
-        <a
-          href="https://vuejs.org"
-          target="_blank"
-        >
-          Core Docs
-        </a>
-      </li>
-      <li>
-        <a
-          href="https://forum.vuejs.org"
-          target="_blank"
-        >
-          Forum
-        </a>
-      </li>
-      <li>
-        <a
-          href="https://chat.vuejs.org"
-          target="_blank"
-        >
-          Community Chat
-        </a>
-      </li>
-      <li>
-        <a
-          href="https://twitter.com/vuejs"
-          target="_blank"
-        >
-          Twitter
-        </a>
-      </li>
-      <br>
-      <li>
-        <a
-          href="http://vuejs-templates.github.io/webpack/"
-          target="_blank"
-        >
-          Docs for This Template
-        </a>
-      </li>
-    </ul>
-    <h2>Ecosystem</h2>
-    <ul>
-      <li>
-        <a
-          href="http://router.vuejs.org/"
-          target="_blank"
-        >
-          vue-router
-        </a>
-      </li>
-      <li>
-        <a
-          href="http://vuex.vuejs.org/"
-          target="_blank"
-        >
-          vuex
-        </a>
-      </li>
-      <li>
-        <a
-          href="http://vue-loader.vuejs.org/"
-          target="_blank"
-        >
-          vue-loader
-        </a>
-      </li>
-      <li>
-        <a
-          href="https://github.com/vuejs/awesome-vue"
-          target="_blank"
-        >
-          awesome-vue
-        </a>
-      </li>
-    </ul>
-    <div>
-      <button v-on:click="getData"> 데이터 베이스 호출 </button>
-      <button v-on:click="getDatabase"> 데이터 베이스 호출 2 </button>
-      <div>{{ temp }}</div>
-    </div>
+    <table>
+      <tr v-for="test in tests" v-bind:key="test.id">
+        <td>{{ test.head }}</td>
+        <td>{{ test.title }}</td>
+        <td>{{ test.author }}</td>
+        <td>{{ test.date }}</td>
+      </tr>
+    </table>
+    <button v-on:click="dataReset">get test</button>
   </div>
 </template>
 
@@ -93,32 +17,48 @@ import axios from 'axios'
 
 export default {
   name: 'HelloWorld',
+  beforeCreate() {
+    console.log("beforeCreate");
+  },
   data () {
+    console.log("data");
+
     return {
-      msg: 'Welcome to Your Vue.js App',
-      temp: ''
-    }
+      tests: []
+    };
   },
   methods: {
-    getData: function () {
-      axios.get('/demo/all')
-        .then(function (response) {
-          console.log(response.data[1].name)
-          this.changeTemp(response.data[1].name)
-        })
-        .catch(function (error) {
-          console.log(error)
-        })
+    onClick() {
+      console.log(this.msg, "버튼");
     },
-    changeTemp: function (data) {
-      console.log(data)
+  },
+  created() {
+    console.log("Created");
+  },
+  methods: {
+    getData : function() {
+      axios.get("/api/hello")
+      .then((response) => {
+        console.log(response.data);
+        this.tests = response.data;
+      })
     },
-    getDatabase: function() {
-      axios.get('/api/hello')
-        .then(function (response) {
-          console.log(response)
-        })
+    dataReset : function() {
+      this.tests = [];
     }
+  },
+  beforeMount(){
+    console.log("beforeMount");
+  },
+  mounted(){
+    console.log("mounted");
+    this.getData();
+  },
+  beforeUpdate(){
+    console.log("beforeUpdate");
+  },
+  updated(){
+    console.log("updated");
   }
 }
 </script>
