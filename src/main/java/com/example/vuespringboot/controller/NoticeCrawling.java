@@ -9,6 +9,7 @@ import com.example.vuespringboot.service.CrawlingService;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.logging.Logger;
 
 @RestController
 @RequestMapping("/api")
@@ -22,5 +23,13 @@ public class NoticeCrawling {
         ArrayList<HashMap<String, String>> notice = crawlingService.getNotice();
 
         return notice;
+    }
+
+    final  private static Logger LOG = Logger.getGlobal();
+    public static final String SECURED_TEXT = "Hello from the secured resource!";
+
+    @GetMapping("/login")
+    public void login() {
+        LOG.info("GET sucessfully called on /login resource");
     }
 }
