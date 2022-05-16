@@ -32,7 +32,8 @@ public class CrawlingService {
 
 //          <th> 공지 태그 판별 조건문
             if(!th.isEmpty()){
-                System.out.println("공지 게시글 입니다.");
+//                test code
+//                System.out.println("공지 게시글 입니다.");
 
                 Elements tdItems = trItem.select("td");
 
@@ -46,11 +47,13 @@ public class CrawlingService {
                 noticeItem.put("author", noticeAuthor);
                 noticeItem.put("date", noticeDate);
 
-                System.out.println("공지 게시글 제목 : " + noticeTitle);
-                System.out.println("공지 게시글 저자 : " + noticeAuthor);
-                System.out.println("공지 게시 날짜 : " + noticeDate);
+//                test code
+//                System.out.println("공지 게시글 제목 : " + noticeTitle);
+//                System.out.println("공지 게시글 저자 : " + noticeAuthor);
+//                System.out.println("공지 게시 날짜 : " + noticeDate);
             } else {
-                System.out.println("일반 게시글 입니다.");
+//                test code
+//                System.out.println("일반 게시글 입니다.");
 
                 Elements tdItems = trItem.select("td");
 
@@ -65,10 +68,11 @@ public class CrawlingService {
                 noticeItem.put("author", author);
                 noticeItem.put("date", date);
 
-                System.out.println("게시글 번호 : " + num);
-                System.out.println("게시을 제목 : " + title);
-                System.out.println("게시글 저자 : " + author);
-                System.out.println("게시 날짜 : " + date);
+//                test code
+//                System.out.println("게시글 번호 : " + num);
+//                System.out.println("게시을 제목 : " + title);
+//                System.out.println("게시글 저자 : " + author);
+//                System.out.println("게시 날짜 : " + date);
             }
 
             //각 게시글 정보를 noticeItems 배열에 추가

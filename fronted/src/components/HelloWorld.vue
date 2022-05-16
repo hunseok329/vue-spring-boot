@@ -8,6 +8,7 @@
         <td>{{ test.date }}</td>
       </tr>
     </table>
+    <button v-on:click="testClicked">이동 버튼</button>
     <button v-on:click="dataReset">get test</button>
       <div class="protected" v-if="loginSuccess">
           <h1>
@@ -90,6 +91,9 @@ export default {
         this.loginError = true;
         throw new Error(err)
       }
+    },
+    testClicked: function() {
+      this.$router.push("/protected")
     }
   },
   beforeMount(){
