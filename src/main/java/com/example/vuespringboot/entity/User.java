@@ -9,39 +9,23 @@ import javax.persistence.Id;
 public class User {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    private Integer id;
-
+    private Integer u_id;
+    private String id;
+    private String pwd;
     private String name;
 
-    private String gender;
+    public Integer getU_id() { return u_id; }
+    public void setU_id(Integer u_id) { this.u_id = u_id; }
 
-    private String city;
-
-    public Integer getId(){
+    public String getId(){
         return id;
     }
-
-    public void setId(Integer id){
+    public void setId(String id){
         this.id = id;
     }
 
-    public String getName(){
-        return name;
-    }
-
-    public void setName(String name){
-        this.name = name;
-    }
-
-    public String getGender(){
-        return gender;
-    }
-
-    public void setGender(String gender){
-        this.gender = gender;
-    }
-
-    public String getCity() { return city; }
-
-    public void setCity(String city) { this.city = city; }
+    public String getPwd() { return pwd; }
+    public void setPwd( String pwd ) { this.pwd = pwd; }
+    public String getName(){ return name; }
+    public void setName(String name){ this.name = name; }
 }

@@ -1,5 +1,6 @@
 package com.example.vuespringboot.config;
 
+import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
@@ -17,6 +18,7 @@ public class WebSecurityConfiguration extends WebSecurityConfigurerAdapter {
                 .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS)
                 .and()
                 .httpBasic()
+                .authenticationEntryPoint(new NoPopupBasicAuthenticationEntryPoint())
                 .and()
                 .authorizeRequests()
                 .antMatchers("/api/hello").permitAll()
@@ -25,11 +27,13 @@ public class WebSecurityConfiguration extends WebSecurityConfigurerAdapter {
                 .and()
                 .csrf().disable();
     }
-
     @Override
     protected void configure(AuthenticationManagerBuilder auth) throws Exception {
         auth.inMemoryAuthentication()
-                .withUser("foo").password("{noop}bar").roles("USER");
+            .withUser("foo").password("{noop}bar").roles("USER");
     }
-
+//    @Bean
+//    public PasswordEncoder passwordEncoder(){
+//        return new BCryptPasswordEncoder();
+//    }
 }

@@ -1,20 +1,34 @@
 <template>
 	<header>
-		<h1><a href="#" class="logo"><img alt="Vue logo" src="../../assets/logo.png" width="80"></a></h1>
+		<h1><router-link to="/" class="logo"><img alt="Vue logo" src="../../assets/daegu.jpg" width="80"></router-link></h1>
 		<div class="menuWrap">
-			<ul class="menu">
-				<li><a href="javascript:;">메뉴1</a></li>
-				<li><a href="javascript:;">메뉴2</a></li>
-				<li><a href="javascript:;">메뉴3</a></li>
-				<li><a href="javascript:;">메뉴4</a></li>
+			<ul class="menu" v-if="check">
+				<li><router-link to="/NoticeBoard">통합 게시판</router-link></li>
+				<li><router-link to="/">취업 정보</router-link></li>
+				<li><router-link to="/">팀원 찾기</router-link></li>
+				<li><router-link to="/">로그아웃</router-link></li>
+				<li><router-link to="/">마이페이지</router-link></li>
+			</ul>
+			<ul class="menu" v-else>
+				<li><router-link to="/NoticeBoard">통합 게시판</router-link></li>
+				<li><router-link to="/">취업 정보</router-link></li>
+				<li><router-link to="/">팀원 찾기</router-link></li>
+				<li><router-link to="/Login">로그인</router-link></li>
+				<li><router-link to="/">회원가입</router-link></li>
 			</ul>
 		</div>
 	</header>
 </template>
 
 <script>
+import store from '../../store'
 export default {
-	
+	name: 'Header',
+	data() {
+		return {
+			check: store.state.loginSuccess //vuex에서 로그인 상태를 받아와서 저장
+		}
+	}
 }
 </script>
 

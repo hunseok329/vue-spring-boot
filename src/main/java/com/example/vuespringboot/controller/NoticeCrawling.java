@@ -14,9 +14,10 @@ import java.util.logging.Logger;
 @RestController
 @RequestMapping("/api")
 public class NoticeCrawling {
-
+    final private static Logger LOG = Logger.getGlobal();
     @Autowired
     private CrawlingService crawlingService;
+
     @GetMapping("/hello")
     public ArrayList<HashMap<String, String>> noticeCrawling() throws IOException {
         //크롤링 결과 리스트
@@ -25,7 +26,7 @@ public class NoticeCrawling {
         return notice;
     }
 
-    final  private static Logger LOG = Logger.getGlobal();
+
     public static final String SECURED_TEXT = "Hello from the secured resource!";
 
     @GetMapping("/login")

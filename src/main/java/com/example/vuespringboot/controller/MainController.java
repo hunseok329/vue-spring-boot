@@ -16,19 +16,19 @@ public class MainController {
         this.userRepository = userRepository;
     }
 
-    @PostMapping(path="/add") // Map ONLY POST Requests
-    public @ResponseBody String addNewUser (@RequestParam String name
-            , @RequestParam String gender, @RequestParam String city) {
-        // @ResponseBody means the returned String is the response, not a view name
-        // @RequestParam means it is a parameter from the GET or POST request
-
-        User n = new User();
-        n.setName(name);
-        n.setGender(gender);
-        n.setCity(city);
-        userRepository.save(n);
-        return "Saved";
-    }
+//    @PostMapping(path="/add") // Map ONLY POST Requests
+//    public @ResponseBody String addNewUser (@RequestParam String name
+//            , @RequestParam String gender, @RequestParam String city) {
+//        // @ResponseBody means the returned String is the response, not a view name
+//        // @RequestParam means it is a parameter from the GET or POST request
+//
+//        User n = new User();
+//        n.setName(name);
+//        n.setGender(gender);
+//        n.setCity(city);
+//        userRepository.save(n);
+//        return "Saved";
+//    }
 
     @GetMapping(path="/all")
     public @ResponseBody Iterable<User> getAllUsers() {

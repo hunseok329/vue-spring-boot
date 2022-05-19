@@ -1,52 +1,47 @@
 <template>
   <div class="hello">
-    <table>
-      <tr v-for="test in tests" v-bind:key="test.id">
-        <td>{{ test.head }}</td>
-        <td>{{ test.title }}</td>
-        <td>{{ test.author }}</td>
-        <td>{{ test.date }}</td>
-      </tr>
-    </table>
-    <button v-on:click="testClicked">이동 버튼</button>
-    <button v-on:click="dataReset">get test</button>
-      <div class="protected" v-if="loginSuccess">
-          <h1>
-              <b-badge variant="success">보안 사이트에 대한 액세스가 허용되었습니다</b-badge>
-          </h1>
-          <h5>로그인 성공!</h5>
-      </div>
-      <div class="unprotected" v-else-if="loginError">
-          <h1>
-              <b-badge variant="danger">이 페이지에 대한 접근 권한이 없습니다.</b-badge>
-          </h1>
-          <h5>로그인 실패!</h5>
-      </div>
-      <div class="unprotected" v-else>
-          <h1>
-              <b-badge variant="info">로그인해주세요</b-badge>
-          </h1>
-          <h5>로그인 하지 않았습니다. 로그인을 해주세요</h5>
+    <p class="login"><router-link to="/Login">로그인</router-link></p>
+    <div class="menubar_wrapper">
+      <ul>
 
-          <form @submit.prevent="login()">
-              <label>
-                  <input type="text" placeholder="username" v-model="user">
-              </label>
-              <label>
-                  <input type="password" placeholder="password" v-model="password">
-              </label>
-              <button variant="success" type="submit">Login</button>
-              <p v-if="error" class="error">Bad login information</p>
-          </form>
-      </div>
+        <li class="block_white">
+          <router-link to="/NoticeBoard">
+            <div class="menubar_item_wrapper">
+              <img alt="notiveBoard" src="../assets/n.png" class="menu_img">
+              <div>통합게시판</div>
+            </div>
+          </router-link>
+        </li>
+        
+        <li class="block_green">
+          <router-link to="/NoticeBoard">
+            <div class="menubar_item_wrapper">
+              <img alt="info" src="../assets/t.png" class="menu_img">
+              <div>취업정보</div>
+            </div>
+          </router-link>
+        </li>
+        <li class="block_white">
+          <router-link to="/">
+            <div class="menubar_item_wrapper">
+              <img alt="noticeTeam" src="../assets/j.png" class="menu_img">
+              <div>팀원 모집 및 찾기</div>
+            </div>
+          </router-link>
+        </li>
+      </ul>
+    </div>
   </div>
 </template>
 
 <script>
-import axios from 'axios'
+import Header from './common/Header.vue';
 
 export default {
   name: 'HelloWorld',
+  components: {
+    Header
+  },
   beforeCreate() {
     console.log("beforeCreate");
   },
@@ -54,54 +49,19 @@ export default {
     console.log("data");
 
     return {
-      tests: [],
-      loginSuccess: false,
-      loginError: false,
-      user: '',
-      password: '',
-      error: false
+      tests: ""
     };
   },
   created() {
     console.log("Created");
   },
   methods: {
-    getData : function() {
-      axios.get("/api/hello")
-      .then((response) => {
-        console.log(response.data);
-        this.tests = response.data;
-      })
-    },
-    dataReset : function() {
-      this.tests = [mentos9615588];
-    },
-    async login() {
-      try {
-        const result = await axios.get('/api/login', {
-          auth: {
-            username: this.user,
-            password: this.password
-          }
-        });
-        if (result.status === 200) {
-          this.loginSuccess = true
-        }
-      } catch (err) {
-        this.loginError = true;
-        throw new Error(err)
-      }
-    },
-    testClicked: function() {
-      this.$router.push("/protected")
-    }
   },
   beforeMount(){
     console.log("beforeMount");
   },
   mounted(){
     console.log("mounted");
-    this.getData();
   },
   beforeUpdate(){
     console.log("beforeUpdate");
@@ -114,18 +74,42 @@ export default {
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
+.hello {
+  height: 100%;
+}
 h1, h2 {
   font-weight: normal;
 }
 ul {
   list-style-type: none;
   padding: 0;
+  text-align: center;
 }
 li {
   display: inline-block;
   margin: 0 10px;
+  padding-top: 10%;
+  width: 30%;
+  height: 100%;
 }
 a {
   color: #42b983;
+}
+.menubar_wrapper{
+  height: 100%;
+}
+.menubar_wrapper ul {
+  height: 100%;
+}
+.menu_img {
+  width: 60%;
+}
+.login {
+  text-align: right;
+  padding-right: 5%;
+}
+.menubar_item_wrapper {
+  height: 100%;
+  vertical-align: middle;
 }
 </style>
