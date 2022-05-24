@@ -1,31 +1,60 @@
 package com.example.vuespringboot.entity;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import lombok.Getter;
+import lombok.Setter;
+
+import javax.persistence.*;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
 
 @Entity
+@Getter
+@Setter
+@Table(name="user")
 public class User {
+
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    private Integer u_id;
-    private String id;
-    private String pwd;
-    private String name;
+    private Long id;
 
-    public Integer getU_id() { return u_id; }
-    public void setU_id(Integer u_id) { this.u_id = u_id; }
+    @Column(nullable = false)
+    private String username;
 
-    public String getId(){
-        return id;
+    @Column(nullable = false)
+    private String password;
+
+    private int active;
+
+    private String roles = "";
+
+    private String permissions = "";
+
+    public User(String username, String password, String roles, String permissions){
+        this.username = username;
+        this.password = password;
+        this.roles = roles;
+        this.permissions = permissions;
+
+        this.active = 1;
     }
-    public void setId(String id){
-        this.id = id;
+
+    protected User(){
     }
 
-    public String getPwd() { return pwd; }
-    public void setPwd( String pwd ) { this.pwd = pwd; }
-    public String getName(){ return name; }
-    public void setName(String name){ this.name = name; }
+    public List<String> getRoleList(){
+        if(this.roles.length()>0){
+            return Arrays.asList(this.roles.split(","));
+        }
+
+        return new ArrayList<>();
+    }
+
+    public List<String> getPermissionList(){
+        if(this.permissions.length()>0){
+            return Arrays.asList(this.permissions.split(","));
+        }
+
+        return new ArrayList<>();
+    }
 }

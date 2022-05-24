@@ -1,6 +1,17 @@
 <template>
   <div class="hello">
-    <p class="login"><router-link to="/Login">로그인</router-link></p>
+    <div v-if="loginCheck">
+      <p>로그아웃</p>
+    </div>
+    <div v-else>
+      <p class="login" ><router-link to="/Login">로그인</router-link></p>
+    </div>
+
+    
+    <!-- test bootstrap vue code -->
+    <b-btn @click="callRestService()">CALL Spring Boot REST backend service</b-btn>
+
+
     <div class="menubar_wrapper">
       <ul>
 
@@ -49,19 +60,24 @@ export default {
     console.log("data");
 
     return {
-      tests: ""
+      tests: "",
+      loginCheck: false
     };
   },
   created() {
     console.log("Created");
   },
   methods: {
+    check: function() {
+      this.loginCheck = this.$store.getters.isLoggedIn
+    }
   },
   beforeMount(){
     console.log("beforeMount");
   },
   mounted(){
     console.log("mounted");
+    this.check();
   },
   beforeUpdate(){
     console.log("beforeUpdate");

@@ -10,7 +10,7 @@
         </div>
         <div class="unprotected" v-else-if="loginError">
             <div class="form-wrapper">
-                <form @submit.prevent="login()">
+                <!-- <form @submit.prevent="login()">
                     <div class="form-group">
                         <input type="text" class="form-control" placeholder="username" v-model="user">
                     </div>
@@ -20,7 +20,8 @@
                     <div class="login-button">
                         <button class="btn btn-primary" variant="success" type="submit">로그인</button>
                     </div>
-                </form>
+                </form> -->
+                <h5>실패</h5>
                 <div class="signup">
                     회원가입
                 </div>
@@ -61,22 +62,27 @@ export default {
         }
     },
     methods: {
-        async login() {
+        login: function() {
             try {
-                await this.$store.dispatch('login',{
-                user: this.user,
-                password: this.password
-                })
-                await this.$router.push({ name: 'HelloWorld' })
+                this.$store.dispatch('login', {
+                    user: this.user,
+                    password: this.password
+                }).then(() => {
+                    if (this.$store.getters.isLoggedIn == true) {
+                        console.log(this.$store.state.userName)
+                        this.$router.push({name: "HelloWorld"})
+                    } else {
+                        this.$store.state.loginError = true
+                    }
+                })           
             } catch (err) {
-                this.loginError = true;
-                this.error = true;
+                this.loginError = true
+                this.error = true
                 throw new Error(err)
             }
-        },
+        }
     },
     mounted() {
-        console.log(this.$store.state);
         if (this.loginError) {
             alert("틀렸습니다.")
         }
@@ -127,3 +133,5 @@ form {
     text-align: right;
 }
 </style>
+
+

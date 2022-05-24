@@ -41,7 +41,11 @@ export default {
     },
     methods: {
         getData : function() {
-        axios.get("/api/hello")
+        axios.get("/api/hello", {
+            params: {
+                username: "admin"
+            }
+        })
         .then((response) => {
             console.log(response.data);
             this.notice_list = response.data;

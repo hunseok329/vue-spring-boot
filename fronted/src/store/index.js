@@ -25,20 +25,22 @@ export default new Vuex.Store({
         }
     },
     actions: {
-        async login({commit}, {user, password}) {
+        login: function({commit}, {user, password}) {
             try {
-                const result = await axios.get('/api/login', {
+                axios.get('/api/login', {
                     auth: {
                         username: user,
                         password: password
                     }
-                });
-                if (result.status == 200) {
-                    commit('loginSuccess', {
-                        userName: user,
-                        userPass: password
-                    });
-                }
+                })
+                .then((response) => {
+                    if (response.status == 200) {
+                        commit('loginSuccess', {
+                            user: user,
+                            paswword: password
+                        })
+                    }
+                })
             } catch (err) {
                 commit('loginError', {
                     userName: user

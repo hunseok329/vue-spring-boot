@@ -25,14 +25,13 @@ public class CrawlingService {
         Elements parsingTr = parsingTbody.select("tr");
 
 
-        for(Element trItem : parsingTr){
+        for (Element trItem : parsingTr) {
             HashMap<String, String> noticeItem = new HashMap<String, String>();
 
             Elements th = trItem.select("th");
 
 //          <th> 공지 태그 판별 조건문
-            if(!th.isEmpty()){
-//                test code
+            if (!th.isEmpty()) {
 //                System.out.println("공지 게시글 입니다.");
 
                 Elements tdItems = trItem.select("td");
@@ -47,12 +46,7 @@ public class CrawlingService {
                 noticeItem.put("author", noticeAuthor);
                 noticeItem.put("date", noticeDate);
 
-//                test code
-//                System.out.println("공지 게시글 제목 : " + noticeTitle);
-//                System.out.println("공지 게시글 저자 : " + noticeAuthor);
-//                System.out.println("공지 게시 날짜 : " + noticeDate);
             } else {
-//                test code
 //                System.out.println("일반 게시글 입니다.");
 
                 Elements tdItems = trItem.select("td");
@@ -68,11 +62,6 @@ public class CrawlingService {
                 noticeItem.put("author", author);
                 noticeItem.put("date", date);
 
-//                test code
-//                System.out.println("게시글 번호 : " + num);
-//                System.out.println("게시을 제목 : " + title);
-//                System.out.println("게시글 저자 : " + author);
-//                System.out.println("게시 날짜 : " + date);
             }
 
             //각 게시글 정보를 noticeItems 배열에 추가
