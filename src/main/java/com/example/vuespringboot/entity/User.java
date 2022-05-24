@@ -1,47 +1,60 @@
 package com.example.vuespringboot.entity;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import lombok.Getter;
+import lombok.Setter;
+
+import javax.persistence.*;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
 
 @Entity
+@Getter
+@Setter
+@Table(name="user")
 public class User {
+
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    private Integer id;
+    private Long id;
 
-    private String name;
+    @Column(nullable = false)
+    private String username;
 
-    private String gender;
+    @Column(nullable = false)
+    private String password;
 
-    private String city;
+    private int active;
 
-    public Integer getId(){
-        return id;
+    private String roles = "";
+
+    private String permissions = "";
+
+    public User(String username, String password, String roles, String permissions){
+        this.username = username;
+        this.password = password;
+        this.roles = roles;
+        this.permissions = permissions;
+
+        this.active = 1;
     }
 
-    public void setId(Integer id){
-        this.id = id;
+    protected User(){
     }
 
-    public String getName(){
-        return name;
+    public List<String> getRoleList(){
+        if(this.roles.length()>0){
+            return Arrays.asList(this.roles.split(","));
+        }
+
+        return new ArrayList<>();
     }
 
-    public void setName(String name){
-        this.name = name;
+    public List<String> getPermissionList(){
+        if(this.permissions.length()>0){
+            return Arrays.asList(this.permissions.split(","));
+        }
+
+        return new ArrayList<>();
     }
-
-    public String getGender(){
-        return gender;
-    }
-
-    public void setGender(String gender){
-        this.gender = gender;
-    }
-
-    public String getCity() { return city; }
-
-    public void setCity(String city) { this.city = city; }
 }

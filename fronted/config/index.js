@@ -14,9 +14,6 @@ module.exports = {
       '/api': {
         target: 'http://localhost:8081'
       },
-      '/demo': {
-        target: 'http://localhost:8081'
-      }
     },
 
     // Various Dev Server settings
