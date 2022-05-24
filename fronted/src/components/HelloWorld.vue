@@ -6,38 +6,38 @@
     <div v-else>
       <p class="login" ><router-link to="/Login">로그인</router-link></p>
     </div>
-
-    
-    <!-- test bootstrap vue code -->
-    <b-btn @click="callRestService()">CALL Spring Boot REST backend service</b-btn>
-
-
     <div class="menubar_wrapper">
       <ul>
 
         <li class="block_white">
           <router-link to="/NoticeBoard">
+          <sequential-entrance fromTop>
             <div class="menubar_item_wrapper">
               <img alt="notiveBoard" src="../assets/n.png" class="menu_img">
               <div>통합게시판</div>
             </div>
+            </sequential-entrance>
           </router-link>
         </li>
         
         <li class="block_green">
           <router-link to="/NoticeBoard">
+          <sequential-entrance fromTop>
             <div class="menubar_item_wrapper">
               <img alt="info" src="../assets/t.png" class="menu_img">
-              <div>취업정보</div>
+              <div>팀원 모집 및 찾기</div>
             </div>
+            </sequential-entrance>
           </router-link>
         </li>
         <li class="block_white">
           <router-link to="/">
+          <sequential-entrance fromTop>
             <div class="menubar_item_wrapper">
               <img alt="noticeTeam" src="../assets/j.png" class="menu_img">
-              <div>팀원 모집 및 찾기</div>
+              <div>취업정보</div>
             </div>
+            </sequential-entrance>
           </router-link>
         </li>
       </ul>
@@ -109,7 +109,9 @@ li {
   height: 100%;
 }
 a {
+  text-decoration-line: none;
   color: #42b983;
+  font-weight: bold;
 }
 .menubar_wrapper{
   height: 100%;
