@@ -113,32 +113,32 @@ public class CrawlingService {
 
                 String noticeTitleAattr = null;
                 noticeTitleAattr = tdItems.get(2).select("a").attr("href");
-                String noticeTitleA = "https://daegu.ac.kr/" + noticeTitleAattr;
+                String noticePageUrl = "https://daegu.ac.kr/" + noticeTitleAattr;
 
                 noticeItem.put("head", "공지");
                 noticeItem.put("title", noticeTitle);
-                noticeItem.put("href", noticeTitleA);
+                noticeItem.put("href", noticePageUrl);
                 noticeItem.put("category", category);
                 noticeItem.put("author", noticeAuthor);
                 noticeItem.put("date", noticeDate);
 
-                System.out.println(noticeTitleA);
+                System.out.println(noticePageUrl);
             } else {
                 //일반
                 String noticeTitleAattr = null;
                 noticeTitleAattr = tdItems.get(2).select("a").attr("onclick");
                 noticeTitleAattr = noticeTitleAattr.substring(noticeTitleAattr.lastIndexOf("(") + 1, noticeTitleAattr.lastIndexOf(")"));
 
-                String noticeTitleA = "https://daegu.ac.kr/article/DG159/detail/" + noticeTitleAattr;
+                String noticePageUrl = "https://daegu.ac.kr/article/DG159/detail/" + noticeTitleAattr;
 
                 noticeItem.put("head", x);
                 noticeItem.put("title", noticeTitle);
-                noticeItem.put("href", noticeTitleA);
+                noticeItem.put("href", noticePageUrl);
                 noticeItem.put("category", category);
                 noticeItem.put("author", noticeAuthor);
                 noticeItem.put("date", noticeDate);
 
-                System.out.println(noticeTitleA);
+                System.out.println(noticePageUrl);
             }
             tempList.add(noticeItem);
         }
@@ -158,6 +158,8 @@ public class CrawlingService {
         Elements parsingTbody = parsingTable.select("tbody");
         Elements parsingTr = parsingTbody.select("tr");
 
+        String base_url = url.substring(0, url.lastIndexOf("?"));
+
         for (Element trItem : parsingTr) {
             HashMap<String, String> noticeItem = new HashMap<String, String>();
 
@@ -169,12 +171,16 @@ public class CrawlingService {
                 Elements tdItems = trItem.select("td");
 
                 String noticeTitle = tdItems.get(0).text();
+                String noticeTitelA = tdItems.get(0).select("a").attr("href");
                 String noticeAuthor = tdItems.get(1).text();
                 String noticeDate = tdItems.get(2).text();
+
+                String noticePageUrl = base_url + noticeTitelA;
 
 //               hashMap 생성
                 noticeItem.put("head", "공지");
                 noticeItem.put("title", noticeTitle);
+                noticeItem.put("href", noticePageUrl);
                 noticeItem.put("category", category);
                 noticeItem.put("author", noticeAuthor);
                 noticeItem.put("date", noticeDate);
@@ -184,12 +190,16 @@ public class CrawlingService {
 
                 String num = tdItems.get(0).text();
                 String title = tdItems.get(1).text();
+                String titleA = tdItems.get(1).select("a").attr("href");
                 String author = tdItems.get(2).text();
                 String date = tdItems.get(3).text();
+
+                String noticePageUrl = base_url + titleA;
 
 //                hashMap 생성
                 noticeItem.put("head", num);
                 noticeItem.put("title", title);
+                noticeItem.put("href", noticePageUrl);
                 noticeItem.put("category", category);
                 noticeItem.put("author", author);
                 noticeItem.put("date", date);
