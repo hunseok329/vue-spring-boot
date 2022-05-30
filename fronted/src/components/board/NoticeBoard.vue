@@ -14,7 +14,7 @@
             <tbody>
                 <tr v-for="notice_item in notice_list" v-bind:key="notice_item.id" class="table_tr">
                     <td>{{ notice_item.head }}</td>
-                    <td>{{ notice_item.title }}</td>
+                    <td><a v-bind:href="notice_item.href">{{ notice_item.title }}</a></td>
                     <td>{{ notice_item.category }}</td>
                     <td>{{ notice_item.author }}</td>
                     <td>{{ notice_item.date }}</td>

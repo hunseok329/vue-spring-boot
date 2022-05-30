@@ -9,9 +9,6 @@ import org.jsoup.select.Elements;
 import org.springframework.stereotype.Service;
 
 import java.io.IOException;
-import java.text.DateFormat;
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
 import java.util.*;
 
 @Service
@@ -101,29 +98,47 @@ public class CrawlingService {
 
             //공지사항 이미지 체크
             String x = tdItems.get(0).text();
-            
+
             String noticeTag = tdItems.get(1).text();
             String noticeTitle = tdItems.get(2).text();
             String noticeAuthor = tdItems.get(3).text();
             String noticeDate = tdItems.get(4).text();
+
 
             // Date 값을 yy/MM/dd로 설정
             noticeDate = noticeDate.replaceAll("-", "/").substring(2);
 
             if(x.isEmpty()) {
                 //공지
+
+                String noticeTitleAattr = null;
+                noticeTitleAattr = tdItems.get(2).select("a").attr("href");
+                String noticeTitleA = "https://daegu.ac.kr/" + noticeTitleAattr;
+
                 noticeItem.put("head", "공지");
                 noticeItem.put("title", noticeTitle);
+                noticeItem.put("href", noticeTitleA);
                 noticeItem.put("category", category);
                 noticeItem.put("author", noticeAuthor);
                 noticeItem.put("date", noticeDate);
+
+                System.out.println(noticeTitleA);
             } else {
                 //일반
+                String noticeTitleAattr = null;
+                noticeTitleAattr = tdItems.get(2).select("a").attr("onclick");
+                noticeTitleAattr = noticeTitleAattr.substring(noticeTitleAattr.lastIndexOf("(") + 1, noticeTitleAattr.lastIndexOf(")"));
+
+                String noticeTitleA = "https://daegu.ac.kr/article/DG159/detail/" + noticeTitleAattr;
+
                 noticeItem.put("head", x);
                 noticeItem.put("title", noticeTitle);
+                noticeItem.put("href", noticeTitleA);
                 noticeItem.put("category", category);
                 noticeItem.put("author", noticeAuthor);
                 noticeItem.put("date", noticeDate);
+
+                System.out.println(noticeTitleA);
             }
             tempList.add(noticeItem);
         }
@@ -184,5 +199,16 @@ public class CrawlingService {
             tempList.add(noticeItem);
         }
         return tempList;
+    }
+
+
+    public String getUrlBachelor(String base_url, String detail_url) {
+        String result = detail_url;
+        int front = result.lastIndexOf("(");
+        int back = result.lastIndexOf(")");
+
+        System.out.println(front);
+        System.out.println(back);
+        return result;
     }
 }
