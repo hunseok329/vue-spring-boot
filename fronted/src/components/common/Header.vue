@@ -14,7 +14,7 @@
 				<li><router-link to="/">취업 정보</router-link></li>
 				<li><router-link to="/">팀원 찾기</router-link></li>
 				<li><router-link to="/Login">로그인</router-link></li>
-				<li><router-link to="/">회원가입</router-link></li>
+				<li><router-link to="/SignUp">회원가입</router-link></li>
 			</ul>
 		</div>
 	</header>

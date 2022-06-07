@@ -210,15 +210,4 @@ public class CrawlingService {
         }
         return tempList;
     }
-
-
-    public String getUrlBachelor(String base_url, String detail_url) {
-        String result = detail_url;
-        int front = result.lastIndexOf("(");
-        int back = result.lastIndexOf(")");
-
-        System.out.println(front);
-        System.out.println(back);
-        return result;
-    }
 }

@@ -29,7 +29,7 @@
         </div>
         <div class="unprotected" v-else>
             <div class="form-wrapper">
-                <form @submit.prevent="login()">
+                <form v-on:submit.prevent>
                     <div class="form-group">
                         <input type="text" class="form-control" placeholder="username" v-model="user">
                     </div>
@@ -37,11 +37,11 @@
                         <input type="password" class="form-control" placeholder="password" v-model="password">
                     </div>
                     <div class="login-button">
-                        <button class="btn btn-primary" variant="success" type="submit">로그인</button>
+                        <button class="btn btn-primary" variant="success" @click="login()">로그인</button>
                     </div>
                 </form>
                 <div class="signup">
-                    회원가입
+                    <router-link to="/SignUp">회원가입</router-link>
                 </div>
             </div>
         </div>

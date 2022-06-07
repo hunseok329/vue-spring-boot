@@ -3,6 +3,7 @@ package com.example.vuespringboot.controller;
 import com.example.vuespringboot.dao.UserRepository;
 import com.example.vuespringboot.entity.User;
 import com.example.vuespringboot.service.CrawlingService;
+import com.example.vuespringboot.service.SignupUserService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -25,6 +26,8 @@ public class MainController {
     final private static Logger LOG = Logger.getGlobal();
     @Autowired
     private CrawlingService crawlingService;
+    @Autowired
+    private SignupUserService signupUserService;
 
 
     @GetMapping(path="/all")
@@ -50,7 +53,6 @@ public class MainController {
     @GetMapping(path="/login")
     public @ResponseBody void login() {
         LOG.info("GET sucessfully called on /login resource");
-        System.out.println("test");
     }
 
     @GetMapping(path = "/secured")
@@ -58,4 +60,13 @@ public class MainController {
         LOG.info("GET successfully called on /secured resource");
         return SECURED_TEXT;
     }
+
+    @PostMapping(path = "/signup")
+    public @ResponseBody void signup(HttpServletRequest request){
+        signupUserService.SignupUser(request);
+
+        LOG.info("GET successfully called on /signup resource");
+    }
+
+    
 }

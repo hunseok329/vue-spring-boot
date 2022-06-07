@@ -4,6 +4,7 @@ import HelloWorld from '@/components/HelloWorld'
 import Protected from '@/components/common/Protected'
 import Login from '@/components/board/Login'
 import NoticeBoard from '@/components/board/NoticeBoard'
+import SignUp from '@/components/board/SignUp'
 
 import store from '../store'
 
@@ -40,6 +41,11 @@ export default new Router({
       path: '/Login',
       name: 'Login',
       component: Login,
+    },
+    {
+      path: '/SignUp',
+      name: 'SignUp',
+      component: SignUp,
     },
     {
       path: '/NoticeBoard',
