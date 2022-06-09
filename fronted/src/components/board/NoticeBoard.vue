@@ -45,7 +45,7 @@ export default {
         getData : function() {
         axios.get("/api/hello", {
             params: {
-                username: "admin"
+                username: this.$store.state.userName
             }
         })
         .then((response) => {

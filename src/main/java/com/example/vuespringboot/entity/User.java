@@ -57,4 +57,15 @@ public class User {
 
         return new ArrayList<>();
     }
+
+//    public boolean NullCheck() {
+//        boolean result = false;
+//
+//        if (this.username.isEmpty()) {
+//            result = false;
+//        } else {
+//            result = true;
+//        }
+//        return result;
+//    }
 }

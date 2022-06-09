@@ -121,8 +121,6 @@ public class CrawlingService {
                 noticeItem.put("category", category);
                 noticeItem.put("author", noticeAuthor);
                 noticeItem.put("date", noticeDate);
-
-                System.out.println(noticePageUrl);
             } else {
                 //일반
                 String noticeTitleAattr = null;
@@ -137,8 +135,6 @@ public class CrawlingService {
                 noticeItem.put("category", category);
                 noticeItem.put("author", noticeAuthor);
                 noticeItem.put("date", noticeDate);
-
-                System.out.println(noticePageUrl);
             }
             tempList.add(noticeItem);
         }

@@ -68,5 +68,11 @@ public class MainController {
         LOG.info("GET successfully called on /signup resource");
     }
 
-    
+    @GetMapping(path = "/overlap")
+    public @ResponseBody boolean overlap(HttpServletRequest request) {
+        String username = request.getParameter("username");
+        LOG.info("GET successfully called on /overlap resource");
+
+        return userRepository.existsByUsername(username);
+    }
 }

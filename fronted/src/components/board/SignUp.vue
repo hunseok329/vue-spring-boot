@@ -4,6 +4,7 @@
         <form v-on:submit.prevent>
             <label>USER ID : </label>
             <input type="text" placeholder="ID를 입력해주세요" v-model="username">
+            <button v-on:click="overlap()">중복확인</button>
             <label>USER PW : </label>
             <input type="password" placeholder="비밀번호를 입력해주세요" v-model="password">
             <p>현재 등록된 공지사항 목록들</p>
@@ -74,7 +75,8 @@ export default {
                 suppressScrollX: false,
                 wheelPropagation: true,
             },
-            noticeBoardList : []
+            noticeBoardList : [],
+            usernameCheck: false,
         }
     },
     methods: {
@@ -84,20 +86,46 @@ export default {
             console.log(this.noticeBoardList);
         },
         addList: function(notice) {
-            this.noticeList.push(notice)
+
+            if (this.noticeList.indexOf(notice) == -1) {
+                this.noticeList.push(notice)
+            }
+            
         },
         deleteItem: function(index) {
             this.noticeList.pop(index)
         },
         onSubmit: function() {
-            const fd = new FormData()
-            fd.append('username', this.username)
-            fd.append('password', this.password)
-            fd.append('noticeList', this.noticeList)
+            if(this.usernameCheck){
+                const fd = new FormData()
+                fd.append('username', this.username)
+                fd.append('password', this.password)
+                fd.append('noticeList', this.noticeList)
+                try {
+                    axios.post('/api/signup', fd).then((response) => {
+                        console.log(response);
+                        this.$router.push({name: 'Login'})
+                    })
+                } catch (error) {
+                    throw new Error(error);
+                }
+            }
+        },
+        overlap: function() {
             try {
-                axios.post('/api/signup', fd).then((response) => {
-                    console.log(response);
-                    this.$router.push({name: 'Login'})
+                axios.get('/api/overlap', {
+                    params: {
+                        username: this.username
+                        }
+                    }).then((res) => {
+                    console.log(res.data);
+                    if (res.data) {
+                        alert("사용중인 아이디 입니다.")
+                        this.usernameCheck = false
+                    } else {
+                        alert("사용 가능한 아이디 입니다.")
+                        this.usernameCheck = true
+                    }
                 })
             } catch (error) {
                 throw new Error(error);
