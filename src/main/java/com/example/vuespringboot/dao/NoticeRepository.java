@@ -7,4 +7,6 @@ import java.util.List;
 
 public interface NoticeRepository extends JpaRepository<NoticeList, Long> {
     List<NoticeList> findByUserId(String userId);
+
+    void deleteByUserId(String username);
 }

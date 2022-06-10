@@ -3,6 +3,8 @@ package com.example.vuespringboot.controller;
 import com.example.vuespringboot.dao.UserRepository;
 import com.example.vuespringboot.entity.User;
 import com.example.vuespringboot.service.CrawlingService;
+import com.example.vuespringboot.service.MyPageService;
+import com.example.vuespringboot.service.SignupUserService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -25,6 +27,11 @@ public class MainController {
     final private static Logger LOG = Logger.getGlobal();
     @Autowired
     private CrawlingService crawlingService;
+    @Autowired
+    private SignupUserService signupUserService;
+
+    @Autowired
+    private MyPageService myPageService;
 
 
     @GetMapping(path="/all")
@@ -50,12 +57,40 @@ public class MainController {
     @GetMapping(path="/login")
     public @ResponseBody void login() {
         LOG.info("GET sucessfully called on /login resource");
-        System.out.println("test");
     }
 
     @GetMapping(path = "/secured")
     public @ResponseBody String getSecured() {
         LOG.info("GET successfully called on /secured resource");
         return SECURED_TEXT;
+    }
+
+    @PostMapping(path = "/signup")
+    public @ResponseBody void signup(HttpServletRequest request){
+        signupUserService.SignupUser(request);
+
+        LOG.info("GET successfully called on /signup resource");
+    }
+
+    @GetMapping(path = "/overlap")
+    public @ResponseBody boolean overlap(HttpServletRequest request) {
+        String username = request.getParameter("username");
+        LOG.info("GET successfully called on /overlap resource");
+
+        return userRepository.existsByUsername(username);
+    }
+
+    @GetMapping(path = "/mypage")
+    public @ResponseBody ArrayList<String> mypage(HttpServletRequest request){
+        String username = request.getParameter("username");
+
+        ArrayList<String> noticeList = myPageService.getNoticeList(username);
+
+        return noticeList;
+    }
+
+    @PostMapping(path = "/modify")
+    public @ResponseBody void mypage_modify(HttpServletRequest request) {
+        myPageService.modifyMyPage(request);
     }
 }

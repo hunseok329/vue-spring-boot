@@ -6,15 +6,15 @@
 				<li><router-link to="/NoticeBoard">통합 게시판</router-link></li>
 				<li><router-link to="/">취업 정보</router-link></li>
 				<li><router-link to="/">팀원 찾기</router-link></li>
-				<li><router-link to="/">로그아웃</router-link></li>
-				<li><router-link to="/">마이페이지</router-link></li>
+				<li v-on:click="logout"><router-link to="/">로그아웃</router-link></li>
+				<li><router-link to="/MyPage">마이페이지</router-link></li>
 			</ul>
 			<ul class="menu" v-else>
 				<li><router-link to="/NoticeBoard">통합 게시판</router-link></li>
 				<li><router-link to="/">취업 정보</router-link></li>
 				<li><router-link to="/">팀원 찾기</router-link></li>
 				<li><router-link to="/Login">로그인</router-link></li>
-				<li><router-link to="/">회원가입</router-link></li>
+				<li><router-link to="/SignUp">회원가입</router-link></li>
 			</ul>
 		</div>
 	</header>
@@ -27,6 +27,11 @@ export default {
 	data() {
 		return {
 			check: store.state.loginSuccess //vuex에서 로그인 상태를 받아와서 저장
+		}
+	},
+	methods: {
+		logout: function() {
+			this.$store.state.loginSuccess = false
 		}
 	}
 }

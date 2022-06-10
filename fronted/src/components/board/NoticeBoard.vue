@@ -6,6 +6,7 @@
                 <tr class="table_tr">
                     <th>번호</th>
                     <th>제목</th>
+                    <th>카테고리</th>
                     <th>글쓴이</th>
                     <th>날짜</th>
                 </tr>
@@ -13,7 +14,8 @@
             <tbody>
                 <tr v-for="notice_item in notice_list" v-bind:key="notice_item.id" class="table_tr">
                     <td>{{ notice_item.head }}</td>
-                    <td>{{ notice_item.title }}</td>
+                    <td><a v-bind:href="notice_item.href">{{ notice_item.title }}</a></td>
+                    <td>{{ notice_item.category }}</td>
                     <td>{{ notice_item.author }}</td>
                     <td>{{ notice_item.date }}</td>
                 </tr>
@@ -43,7 +45,7 @@ export default {
         getData : function() {
         axios.get("/api/hello", {
             params: {
-                username: "admin"
+                username: this.$store.state.userName
             }
         })
         .then((response) => {
@@ -79,7 +81,7 @@ table {
 
 }
 td {
-    font-size: 135%;
+    font-size: 130%;
     padding-bottom: 2%;  
 }
 table th{

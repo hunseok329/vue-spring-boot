@@ -14,8 +14,12 @@
     "bootstrap": "5.1.3",
     "bootstrap-vue": "2.22.0",
     "vue": "2.6.14",
+    "vue-custom-scrollbar": "1.4.4",
     "vue-router": "^3.0.1",
+    "vue-scroll-shadow": "0.1.0",
     "vue-sequential-entrance": "1.1.3",
+    "vue-virtual-scroll-list": "2.3.3",
+    "vuebar": "0.0.20",
     "vuex": "3.6.2"
   },
   "devDependencies": {
