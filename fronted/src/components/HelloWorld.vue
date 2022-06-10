@@ -1,7 +1,7 @@
 <template>
   <div class="hello">
-    <div v-if="loginCheck">
-      <p>로그아웃</p>
+    <div v-if="this.$store.state.loginSuccess">
+      <p class="logout" v-on:click="logout()">로그아웃</p>
     </div>
     <div v-else>
       <p class="login" ><router-link to="/Login">로그인</router-link></p>
@@ -60,16 +60,14 @@ export default {
     console.log("data");
 
     return {
-      tests: "",
-      loginCheck: false
     };
   },
   created() {
     console.log("Created");
   },
   methods: {
-    check: function() {
-      this.loginCheck = this.$store.getters.isLoggedIn
+    logout: function() {
+      this.$store.state.loginSuccess = false
     }
   },
   beforeMount(){
@@ -77,7 +75,6 @@ export default {
   },
   mounted(){
     console.log("mounted");
-    this.check();
   },
   beforeUpdate(){
     console.log("beforeUpdate");
@@ -125,6 +122,11 @@ a {
 .login {
   text-align: right;
   padding-right: 5%;
+}
+.logout {
+  text-align: right;
+  padding-right: 5%;
+  color: #42b983;
 }
 .menubar_item_wrapper {
   height: 100%;

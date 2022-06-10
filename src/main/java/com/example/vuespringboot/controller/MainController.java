@@ -3,6 +3,7 @@ package com.example.vuespringboot.controller;
 import com.example.vuespringboot.dao.UserRepository;
 import com.example.vuespringboot.entity.User;
 import com.example.vuespringboot.service.CrawlingService;
+import com.example.vuespringboot.service.MyPageService;
 import com.example.vuespringboot.service.SignupUserService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -28,6 +29,9 @@ public class MainController {
     private CrawlingService crawlingService;
     @Autowired
     private SignupUserService signupUserService;
+
+    @Autowired
+    private MyPageService myPageService;
 
 
     @GetMapping(path="/all")
@@ -74,5 +78,19 @@ public class MainController {
         LOG.info("GET successfully called on /overlap resource");
 
         return userRepository.existsByUsername(username);
+    }
+
+    @GetMapping(path = "/mypage")
+    public @ResponseBody ArrayList<String> mypage(HttpServletRequest request){
+        String username = request.getParameter("username");
+
+        ArrayList<String> noticeList = myPageService.getNoticeList(username);
+
+        return noticeList;
+    }
+
+    @PostMapping(path = "/modify")
+    public @ResponseBody void mypage_modify(HttpServletRequest request) {
+        myPageService.modifyMyPage(request);
     }
 }

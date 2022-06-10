@@ -5,6 +5,7 @@ import Protected from '@/components/common/Protected'
 import Login from '@/components/board/Login'
 import NoticeBoard from '@/components/board/NoticeBoard'
 import SignUp from '@/components/board/SignUp'
+import MyPage from '@/components/board/MyPage'
 
 import store from '../store'
 
@@ -61,6 +62,11 @@ export default new Router({
           next()
         }
       }
+    },
+    {
+      path: '/MyPage',
+      name: 'MyPage',
+      component: MyPage,
     },
     {
       path: '*',

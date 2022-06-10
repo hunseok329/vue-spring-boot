@@ -12,17 +12,17 @@
             <div class="noticeList">
                 <div>
                     <span>선택한 공지사항</span>
-                    <div v-for="notice in noticeList" v-bind:key="notice.id">
+                    <div v-for="notice, index in noticeList" v-bind:key="notice.id">
                         <span>{{ notice }}</span>
-                        <i v-on:click="deleteItem(notice.id)">X</i>
+                        <i v-on:click="deleteItem(index)">X</i>
                     </div>
                 </div>
                     <div class="scroll-wrapper">
                         <label>대학</label>
                         <vue-custom-scrollbar class="scroll-area"  :settings="settings">
                             <ul>
-                                <li  v-for="item in this.$store.state.noticeBoard" v-bind:key='item.id'>
-                                    <span v-on:click="select(item.id)">{{ item.name }}</span>
+                                <li  v-for="item, index in this.$store.state.noticeBoard" v-bind:key='item.id'>
+                                    <span v-on:click="select(index)">{{ item.name }}</span>
                                 </li>
                             </ul>
                         </vue-custom-scrollbar>
@@ -82,7 +82,7 @@ export default {
     methods: {
         select: function(index) {
             console.log(index);
-            this.noticeBoardList = this.$store.state.noticeBoard[index-1].department
+            this.noticeBoardList = this.$store.state.noticeBoard[index].department
             console.log(this.noticeBoardList);
         },
         addList: function(notice) {
@@ -93,7 +93,7 @@ export default {
             
         },
         deleteItem: function(index) {
-            this.noticeList.pop(index)
+            this.noticeList.splice(index, 1)
         },
         onSubmit: function() {
             if(this.usernameCheck){

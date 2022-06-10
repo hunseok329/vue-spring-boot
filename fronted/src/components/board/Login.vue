@@ -132,6 +132,11 @@ form {
 .signup {
     text-align: right;
 }
+a {
+  text-decoration-line: none;
+  color: #42b983;
+  font-weight: bold;
+}
 </style>
 
 
