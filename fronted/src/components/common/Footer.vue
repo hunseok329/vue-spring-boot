@@ -1,6 +1,6 @@
 <template>
 	<footer>
-		<p>copyRight fyzh99.tistory.com</p>
+		<p>대구대학교</p>
 	</footer>
 </template>
 

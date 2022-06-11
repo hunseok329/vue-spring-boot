@@ -6,6 +6,7 @@ import Login from '@/components/board/Login'
 import NoticeBoard from '@/components/board/NoticeBoard'
 import SignUp from '@/components/board/SignUp'
 import MyPage from '@/components/board/MyPage'
+import JobBoard from '@/components/board/JobBoard'
 
 import store from '../store'
 
@@ -69,9 +70,15 @@ export default new Router({
       component: MyPage,
     },
     {
+      path: '/Job',
+      name: 'Job',
+      component: JobBoard,
+    },
+    {
       path: '*',
       redirect: '/'
     },
+
   ],
   mode: 'history',
   base: process.env.BASE_URL,

@@ -3,6 +3,7 @@ package com.example.vuespringboot.controller;
 import com.example.vuespringboot.dao.UserRepository;
 import com.example.vuespringboot.entity.User;
 import com.example.vuespringboot.service.CrawlingService;
+import com.example.vuespringboot.service.JobCrawlingService;
 import com.example.vuespringboot.service.MyPageService;
 import com.example.vuespringboot.service.SignupUserService;
 import lombok.RequiredArgsConstructor;
@@ -32,6 +33,9 @@ public class MainController {
 
     @Autowired
     private MyPageService myPageService;
+
+    @Autowired
+    private JobCrawlingService jobCrawlingService;
 
 
     @GetMapping(path="/all")
@@ -92,5 +96,12 @@ public class MainController {
     @PostMapping(path = "/modify")
     public @ResponseBody void mypage_modify(HttpServletRequest request) {
         myPageService.modifyMyPage(request);
+    }
+
+    @GetMapping(path = "/job")
+    public @ResponseBody HashMap<String, String> getJobList(HttpServletRequest request) throws IOException {
+        String job_name = request.getParameter("job");
+        HashMap<String, String> jobList = jobCrawlingService.joblist(job_name);
+        return jobList;
     }
 }

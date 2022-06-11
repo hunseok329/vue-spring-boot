@@ -30,8 +30,9 @@
             </sequential-entrance>
           </router-link>
         </li>
+        
         <li class="block_white">
-          <router-link to="/">
+          <router-link to="/Job">
           <sequential-entrance fromTop>
             <div class="menubar_item_wrapper">
               <img alt="noticeTeam" src="../assets/j.png" class="menu_img">
@@ -68,7 +69,7 @@ export default {
   methods: {
     logout: function() {
       this.$store.state.loginSuccess = false
-    }
+    },
   },
   beforeMount(){
     console.log("beforeMount");
@@ -127,6 +128,8 @@ a {
   text-align: right;
   padding-right: 5%;
   color: #42b983;
+  cursor: pointer;
+
 }
 .menubar_item_wrapper {
   height: 100%;

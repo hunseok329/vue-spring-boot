@@ -6,9 +6,11 @@ import router from './router'
 import store from './store'
 import SequentialEntrance from 'vue-sequential-entrance'
 import 'vue-sequential-entrance/vue-sequential-entrance.css'
+import icons from "v-svg-icons"
 
 Vue.use(SequentialEntrance);
 Vue.config.productionTip = false
+Vue.component("icon", icons);
 
 /* eslint-disable no-new */
 new Vue({

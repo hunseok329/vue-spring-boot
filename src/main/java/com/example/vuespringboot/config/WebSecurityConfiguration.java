@@ -38,6 +38,7 @@ public class WebSecurityConfiguration extends WebSecurityConfigurerAdapter {
                 .antMatchers("/api/overlap").permitAll()
                 .antMatchers("/api/mypage").permitAll()
                 .antMatchers("/api/modify").permitAll()
+                .antMatchers("/api/job").permitAll()
                 .antMatchers("/api/login").authenticated()
                 .anyRequest().authenticated() // protect all other requests
             .and()
